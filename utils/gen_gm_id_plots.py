@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 
+# Example : 
+# python3 gen_gm_id_plots.py sky130_fd_pr__nfet_01v8 ../skywater-pdk-libs-sky130_fd_pr/cells/nfet_01v8/sky130_fd_pr__nfet_01v8.bins.csv sky130_fd_pr__nfet_01v8_%s.png
+
 import PySpice.Logging.Logging as Logging
 logger = Logging.setup_logging()
 from PySpice.Spice.Netlist import Circuit
