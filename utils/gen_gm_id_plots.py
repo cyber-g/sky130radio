@@ -10,7 +10,7 @@ import os.path
 
 def create_test_circuit(fet_type, iparam, fet_L, fet_W, coner_path):
     c=Circuit('gm_id')
-    c.include('/home/tclarke/skywater-pdk/libraries/sky130_fd_pr/latest/models/corners/tt.spice')
+    c.include(coner_path)
     fet_L = 0.15
     fet_W = 1
 
