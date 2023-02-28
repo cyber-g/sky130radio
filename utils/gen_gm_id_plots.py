@@ -10,12 +10,11 @@ from PySpice.Unit import *
 import matplotlib.pyplot as plt
 import numpy as np
 import os.path
+import argparse
 
 def create_test_circuit(fet_type, iparam, fet_L, fet_W, coner_path):
     c=Circuit('gm_id')
     c.include(coner_path)
-    fet_L = 0.15
-    fet_W = 1
 
     # create the circuit
     c.V('gg', 1, c.gnd, 0@u_V)
@@ -72,22 +71,29 @@ def read_bins(fname):
     return r
 
 if __name__ == '__main__':
-    import sys
-    if len(sys.argv) < 4:
-        print(f'{sys.argv[0]} <fet_type> <bins_csv> <out file> [width]')
-        print('<out file> is a template with 1 \%s which will contain the plot name. 4 are generated per LxW combo.')
-        print('If [width] is specified, only W/L pairs for that width are processed.')
-        sys.exit(0)
-    fet_type = sys.argv[1]
-    bins_fname = sys.argv[2]
-    figname = sys.argv[3]
+    parser = argparse.ArgumentParser(description='Generate gm/id plots for a given fet type.')
+    parser.add_argument('--fet_type', help='FET type to simulate')
+    parser.add_argument('--bins_csv', help='bins csv file')
+    parser.add_argument('--out_file', help='template with 1 \%s which will contain the plot name. 4 are generated per LxW combo. (Ex:sky130_fd_pr__nfet_01v8_\%s.png)')
+    parser.add_argument('--width', help='If specified, only W/L pairs for that width are processed.', required=False)
+    parser.add_argument('--corner_path', help='the path to the corner file to use')
+
+    args = parser.parse_args()
+
+    fet_type = args.fet_type
+    bins_fname = args.bins_csv
+    figname = args.out_file
     only_W = None
-    if len(sys.argv) > 4:
-        only_W = float(sys.argv[4])
+    if args.width:
+        only_W = float(args.width)
     print(f'Simulating {fet_type} with bins {bins_fname}')
 
+    corner_path = args.corner_path
+
     iparam = f'@m.xm1.m{fet_type}[%s]'
-    c = create_test_circuit(fet_type, iparam, 0.15, 1, '/home/tclarke/skywater-pdk/libraries/sky130_fd_pr/latest/models/corners/tt.spice')
+    fet_L = 0.15
+    fet_W = 1
+    c = create_test_circuit(fet_type, iparam, fet_L, fet_W, corner_path)
     bins = read_bins(bins_fname)
     next(bins)
 
