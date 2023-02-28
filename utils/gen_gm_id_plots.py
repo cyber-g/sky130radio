@@ -52,15 +52,19 @@ def init_plots():
     figs[0].suptitle('Id/W vs gm/Id')
     plts[0].set_xlabel("gm/Id")
     plts[0].set_ylabel("Id/W")
+    plts[0].grid()
     figs[1].suptitle('fT vs gm/Id')
     plts[1].set_xlabel("gm/Id")
     plts[1].set_ylabel("f_T")
+    plts[1].grid()
     figs[2].suptitle('gm/gds vs gm/Id')
     plts[2].set_xlabel("gm/Id")
     plts[2].set_ylabel("gm/gds")
+    plts[2].grid()
     figs[3].suptitle('gm/Id vs Vgg')
     plts[3].set_xlabel("Vgg")
     plts[3].set_ylabel("gm/Id")
+    plts[3].grid()
     return figs, plts
 
 def gen_plots(gm_id, id_W, ft, gm_gds, vsweep, fet_W, fet_L, plts):
