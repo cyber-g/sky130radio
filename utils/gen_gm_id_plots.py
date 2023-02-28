@@ -1,7 +1,12 @@
 #!/usr/bin/env python3
 
 # Example : 
-# python3 gen_gm_id_plots.py sky130_fd_pr__nfet_01v8 ../skywater-pdk-libs-sky130_fd_pr/cells/nfet_01v8/sky130_fd_pr__nfet_01v8.bins.csv sky130_fd_pr__nfet_01v8_%s.png
+# python3 gen_gm_id_plots.py \
+# --f sky130_fd_pr__nfet_01v8  \
+# --b $(SKY130_PDK_ROOT)/cells/nfet_01v8/sky130_fd_pr__nfet_01v8.bins.csv \
+# --o sky130_fd_pr__nfet_01v8_%s.png  \
+# --w 0.39 \
+# --c $(SKY130_PDK_ROOT)/models/corners/tt.spice
 
 import PySpice.Logging.Logging as Logging
 logger = Logging.setup_logging()
