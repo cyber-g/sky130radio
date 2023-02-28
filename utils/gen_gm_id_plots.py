@@ -74,7 +74,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Generate gm/id plots for a given fet type.')
     parser.add_argument('--fet_type', help='FET type to simulate')
     parser.add_argument('--bins_csv', help='bins csv file')
-    parser.add_argument('--out_file', help='template with 1 \%s which will contain the plot name. 4 are generated per LxW combo. (Ex:sky130_fd_pr__nfet_01v8_\%s.png)')
+    parser.add_argument('--out_file', help='template with 1 %%s which will contain the plot name. 4 are generated per LxW combo. (Ex:sky130_fd_pr__nfet_01v8_%%s.png)')
     parser.add_argument('--width', help='If specified, only W/L pairs for that width are processed.', required=False)
     parser.add_argument('--corner_path', help='the path to the corner file to use')
 
